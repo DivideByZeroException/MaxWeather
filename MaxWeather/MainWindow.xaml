@@ -5,8 +5,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaxWeather"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowStyle="None" WindowState="Maximized">
+    <Window.Resources>
+        <Style TargetType="TextBox" x:Key="CustomTextBoxStyle">
+            <Setter Property="BorderBrush" Value="#92D690"/>
+            <Setter Property="BorderThickness" Value="4,4,4,0"/>
+            <Setter Property="SelectionBrush" Value="#FF333333"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#B7FF5E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CustomListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#B7FF5E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0"  Background="#92D690">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.Column="0" >
+                <StackPanel VerticalAlignment="Center" Margin="20" HorizontalAlignment="Left" >
+                    <TextBox x:Name="citySearchTextBox" Width="200" TextChanged="CitySearchTextBox_TextChanged" VerticalAlignment="Center" FontSize="18" Padding="10" Style="{StaticResource CustomTextBoxStyle}" />
+                    <Canvas>
+                        <ListBox FontSize="15" x:Name="suggestionsListBox" Visibility="Collapsed" MaxHeight="100" Canvas.Top="0"  Width="200" BorderBrush="#92D690" BorderThickness="4,0,4,4" SelectionChanged="SuggestionsListBox_SelectionChanged">
+                            <ListBox.ItemContainerStyle>
+                                <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </Canvas>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+                <Button Content="Войти" BorderThickness="0" Width="230" Background="#92D690" Foreground="Black"  FontSize="18"  Style="{StaticResource CustomButtonStyle}"/>
+                <Button Content="Зарегистрироваться" BorderThickness="0" Width="230" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" />
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Window>

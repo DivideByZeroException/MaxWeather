@@ -20,9 +20,41 @@ namespace MaxWeather
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private List<string> cities = new List<string> { "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань","Кострома","Киев","Кейптаун","Керчь","Калининград" }; 
         public MainWindow()
         {
             InitializeComponent();
         }
+        private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (suggestionsListBox.SelectedItem != null)
+            {
+                citySearchTextBox.Text = suggestionsListBox.SelectedItem.ToString();
+                suggestionsListBox.Visibility = Visibility.Collapsed; 
+            }
+        }
+        private void CitySearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = citySearchTextBox.Text.ToLower();
+            List<string> matchedCities = new List<string>();
+            foreach (string city in cities)
+            {
+                if (city.ToLower().StartsWith(searchText))
+                {
+                    matchedCities.Add(city);
+                }
+            }
+            if (matchedCities.Count > 0 && citySearchTextBox.Text!="")
+            {
+                suggestionsListBox.ItemsSource = matchedCities;
+                suggestionsListBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                suggestionsListBox.Visibility = Visibility.Collapsed;
+            }
+        }
     }
+    
 }
