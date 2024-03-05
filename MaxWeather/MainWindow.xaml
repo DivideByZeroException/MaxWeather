@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaxWeather"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStyle="None" WindowState="Maximized">
+        Title="MainWindow" Height="1080" Width="1920" WindowStyle="None" WindowState="Maximized">
     <Window.Resources>
         <Style TargetType="TextBox" x:Key="CustomTextBoxStyle">
             <Setter Property="BorderBrush" Value="#92D690"/>
-            <Setter Property="BorderThickness" Value="4,4,4,0"/>
+            <Setter Property="BorderThickness" Value="4,0,0,0"/>
             <Setter Property="SelectionBrush" Value="#FF333333"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Template">
@@ -25,6 +25,22 @@
             </Setter>
         </Style>
         <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#B7FF5E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FindButtonStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -70,23 +86,143 @@
                 <ColumnDefinition />
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.Column="0" >
-                <StackPanel VerticalAlignment="Center" Margin="20" HorizontalAlignment="Left" >
-                    <TextBox x:Name="citySearchTextBox" Width="200" TextChanged="CitySearchTextBox_TextChanged" VerticalAlignment="Center" FontSize="18" Padding="10" Style="{StaticResource CustomTextBoxStyle}" />
-                    <Canvas>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.Column="0" Margin="50,0,0,0">
+                <StackPanel VerticalAlignment="Center" Margin="0" HorizontalAlignment="Left" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="citySearchTextBox" Width="200" TextChanged="CitySearchTextBox_TextChanged" VerticalAlignment="Center"  FontSize="18" Padding="10" Style="{StaticResource CustomTextBoxStyle}" GotFocus="citySearchTextBox_GotFocus" LostFocus="citySearchTextBox_LostFocus"/>
+
+                        <Button Background="White" Height="auto" BorderBrush="#92D690" BorderThickness="0,0.5,0,0" Style="{StaticResource FindButtonStyle}">
+                            <Image Source="Images/lupa.png"  Width="35" Height="35" />
+                        </Button>
+                    </StackPanel>
+                        <Canvas>
                         <ListBox FontSize="15" x:Name="suggestionsListBox" Visibility="Collapsed" MaxHeight="100" Canvas.Top="0"  Width="200" BorderBrush="#92D690" BorderThickness="4,0,4,4" SelectionChanged="SuggestionsListBox_SelectionChanged">
                             <ListBox.ItemContainerStyle>
                                 <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
                             </ListBox.ItemContainerStyle>
                         </ListBox>
                     </Canvas>
+                    
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
-                <Button Content="Войти" BorderThickness="0" Width="230" Background="#92D690" Foreground="Black"  FontSize="18"  Style="{StaticResource CustomButtonStyle}"/>
+                <Button Content="Войти" BorderThickness="0" Width="200" Background="#92D690" Foreground="Black"  FontSize="18"  Style="{StaticResource CustomButtonStyle}"/>
                 <Button Content="Зарегистрироваться" BorderThickness="0" Width="230" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" />
+                <Button Content="Закрыть" BorderThickness="0"  Width="170" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" Click="Close_Click"/>
             </StackPanel>
         </Grid>
+        <Grid Grid.Row="1">
+            
+            <StackPanel Background="White" Margin="200,100">
+                <Grid Grid.Row="0"  Background="#92D690">
+                 
+                    <Grid Margin="20"  Grid.Column="0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*" />
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="0.35*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label Content="Погода" FontSize="50"></Label>
+                            <Label Content="Сегодня" FontSize="20" Name="today"></Label>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="Images/Weather/day_sun.png"  Width="75" Height="75" VerticalAlignment="Center"/>
+                                <Label Content="-5°" FontSize="70" Name="to1day" VerticalAlignment="Center"></Label>
+                                <Label Content="Ясно" FontSize="20" Margin="0,0,0,0" VerticalAlignment="Center"></Label>
+                            </StackPanel>
+                    
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel>
+                                    <Label Content="0:00" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                    <Image Source="Images/Weather/night_moon.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Label Content="-5°" FontSize="30" Name="time_zero" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                                </StackPanel>
 
+                                <StackPanel>
+                                    <Label Content="3:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                    <Image Source="Images/Weather/night_moon_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Label Content="-5°" FontSize="30" Name="time_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <Label Content="6:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                    <Image Source="Images/Weather/day_sun.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Label Content="-5°" FontSize="30" Name="time_six" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <Label Content="9:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                    <Image Source="Images/Weather/day_sun.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Label Content="-5°" FontSize="30" Name="nine_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <Label Content="12:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                    <Image Source="Images/Weather/day_sun.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Label Content="-5°" FontSize="30" Name="twelve_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <Label Content="15:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                    <Image Source="Images/Weather/day_sun.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Label Content="-5°" FontSize="30" Name="fifty_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <Label Content="18:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                    <Image Source="Images/Weather/day_sun_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Label Content="-5°" FontSize="30" Name="eighty_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="21:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                    <Image Source="Images/Weather/night_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Label Content="-5°" FontSize="30" Name="twentyone_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <Label Content="24:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                    <Image Source="Images/Weather/night_very_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Label Content="-5°" FontSize="30" Name="twentyfour_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                                </StackPanel>
+                                
+                            </StackPanel>
+                           
+                           
+                            <StackPanel></StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="Images/Weather/day_sun.png"  Width="25" Height="25" VerticalAlignment="Center"/>
+                                <Label Content="Давление 735 мм рт. ст. " FontSize="25" Name="to11day" VerticalAlignment="Center"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="Images/Weather/day_sun.png"  Width="25" Height="25" VerticalAlignment="Center"/>
+                                <Label Content="Влажность 64%" FontSize="25" Name="to311day" VerticalAlignment="Center"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="Images/Weather/day_sun.png"  Width="25" Height="25" VerticalAlignment="Center"/>
+                                <Label Content="Ветер южный 3 м/с" FontSize="25" Name="to141day" VerticalAlignment="Center"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="Images/Weather/day_sun.png"  Width="25" Height="25" VerticalAlignment="Center"/>
+                                <Label Content="Ульрафиолетовый индекс 2" FontSize="25" Name="to131day" VerticalAlignment="Center"></Label>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Grid>
+                </Grid>
+                <Border  Background="#B7FF5E" Margin="0,100,0,0">
+                    <StackPanel Margin="20">
+                        <Label Content="Погода"></Label>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            
+        </Grid>
     </Grid>
 </Window>

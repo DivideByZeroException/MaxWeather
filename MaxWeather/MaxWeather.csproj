@@ -94,5 +94,26 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\lupa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Weather\day_cloud.png" />
+    <Resource Include="Images\Weather\day_very_cloud.png" />
+    <Resource Include="Images\Weather\day_sun_and_cloud.png" />
+    <Resource Include="Images\Weather\night_moon.png" />
+    <Resource Include="Images\Weather\night_cloud.png" />
+    <Resource Include="Images\Weather\night_very_cloud.png" />
+    <Resource Include="Images\Weather\night_moon_and_cloud.png" />
+    <Resource Include="Images\Weather\night_very_rain.png" />
+    <Resource Include="Images\Weather\night_rain.png" />
+    <Resource Include="Images\Weather\night_snow.png" />
+    <Resource Include="Images\Weather\night_lightning.png" />
+    <Resource Include="Images\Weather\day_very_rain.png" />
+    <Resource Include="Images\Weather\day_rain.png" />
+    <Resource Include="Images\Weather\day_snow.png" />
+    <Resource Include="Images\Weather\day_lightning.png" />
+    <Resource Include="Images\Weather\day_sun.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

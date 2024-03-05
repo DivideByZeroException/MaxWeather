@@ -25,6 +25,9 @@ namespace MaxWeather
         public MainWindow()
         {
             InitializeComponent();
+            citySearchTextBox.Text = "Поиск города";
+            today.Content = "Сегодня " + $"{DateTime.Now:f}";
+
         }
         private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -47,14 +50,39 @@ namespace MaxWeather
             }
             if (matchedCities.Count > 0 && citySearchTextBox.Text!="")
             {
+
                 suggestionsListBox.ItemsSource = matchedCities;
                 suggestionsListBox.Visibility = Visibility.Visible;
             }
             else
             {
                 suggestionsListBox.Visibility = Visibility.Collapsed;
+         
             }
         }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void citySearchTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (citySearchTextBox.Text == "Поиск города")
+            {
+                citySearchTextBox.Text = string.Empty;
+            }
+        }
+
+        private void citySearchTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (citySearchTextBox.Text == string.Empty)
+            {
+                citySearchTextBox.Text = "Поиск города";
+            }
+        }
+
+      
     }
     
 }
