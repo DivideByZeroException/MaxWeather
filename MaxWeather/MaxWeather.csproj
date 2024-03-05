@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -86,6 +92,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,6 +121,24 @@
     <Resource Include="Images\Weather\day_snow.png" />
     <Resource Include="Images\Weather\day_lightning.png" />
     <Resource Include="Images\Weather\day_sun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-cloudy-2.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-cloudy-3.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-cloudy.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-clear.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-cloudy-2.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-cloudy-3.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-cloudy.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-rainy-2.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-rainy.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-snowy.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-stormy.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-rainy-2.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-rainy.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-snowy.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-stormy.svg" />
+    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-sunny.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

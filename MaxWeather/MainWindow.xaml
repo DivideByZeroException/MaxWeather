@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaxWeather"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920" WindowStyle="None" WindowState="Maximized">
     <Window.Resources>
@@ -113,14 +114,14 @@
         </Grid>
         <Grid Grid.Row="1">
             
-            <StackPanel Background="White" Margin="200,100">
+            <StackPanel Background="White" Margin="180,100">
                 <Grid Grid.Row="0"  Background="#92D690">
                  
                     <Grid Margin="20"  Grid.Column="0" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.25*" />
+                            <ColumnDefinition Width="0.2*" />
                             <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="0.35*"/>
+                            <ColumnDefinition Width="0.2*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
                             <Label Content="Погода" FontSize="50"></Label>
@@ -134,55 +135,55 @@
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel>
-                                    <Label Content="0:00" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <StackPanel Margin="10,0">
+                                    <Label Content="0:00" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                                     <Image Source="Images/Weather/night_moon.png"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_zero" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
-                                <StackPanel>
-                                    <Label Content="3:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <StackPanel Margin="10,0">
+                                    <Label Content="3:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                                     <Image Source="Images/Weather/night_moon_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
-                                <StackPanel>
-                                    <Label Content="6:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <StackPanel Margin="10,0">
+                                    <Label Content="6:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                                     <Image Source="Images/Weather/day_sun.png"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_six" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
-                                <StackPanel>
-                                    <Label Content="9:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <StackPanel Margin="10,0">
+                                    <Label Content="9:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                                     <Image Source="Images/Weather/day_sun.png"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="nine_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
-                                <StackPanel>
-                                    <Label Content="12:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <StackPanel Margin="10,0">
+                                    <Label Content="12:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                                     <Image Source="Images/Weather/day_sun.png"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="twelve_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
-                                <StackPanel>
-                                    <Label Content="15:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <StackPanel Margin="10,0">
+                                    <Label Content="15:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                                     <Image Source="Images/Weather/day_sun.png"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="fifty_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
-                                <StackPanel>
-                                    <Label Content="18:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <StackPanel Margin="10,0">
+                                    <Label Content="18:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                                     <Image Source="Images/Weather/day_sun_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="eighty_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
-                                <StackPanel>
-                                    <Label Content="21:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <StackPanel Margin="10,0">
+                                    <Label Content="21:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                                     <Image Source="Images/Weather/night_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="twentyone_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
-                                <StackPanel>
-                                    <Label Content="24:00" FontSize="35"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <StackPanel  Margin="10,0">
+                                    <Label Content="24:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                                     <Image Source="Images/Weather/night_very_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="twentyfour_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
@@ -190,7 +191,33 @@
                             </StackPanel>
                            
                            
-                            <StackPanel></StackPanel>
+                            <StackPanel >
+                                <lvc:CartesianChart Series="{Binding SeriesCollection}"  LegendLocation="None"  Name="weather" Height="160"  >
+                                    <lvc:CartesianChart.Resources>
+                                        <Style TargetType="lvc:DefaultTooltip">
+                                            <Setter Property="Background" Value="#B7FF5E"></Setter>
+                                            <Setter Property="Foreground" Value="Black"></Setter>
+                                            <Setter Property="ShowTitle" Value="False"></Setter>
+                                            <Setter Property="ShowSeries" Value="False"></Setter>
+                                            <Setter Property="FontWeight" Value="Medium"></Setter>
+                                            <Setter Property="FontSize" Value="10"></Setter>
+                                            
+                                            <Setter Property="CornerRadius" Value="30"></Setter>
+
+                                            <Setter Property="Padding" Value="10"></Setter>
+                                            <Setter Property="BorderThickness" Value="0"></Setter>
+                                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                        </Style>
+                                    </lvc:CartesianChart.Resources>
+                                    <lvc:CartesianChart.AxisY >
+                                        <lvc:Axis Title="Погода" LabelFormatter="{Binding YFormatter}" FontSize="15" MinValue="{Binding MinTemp}" MaxValue="{Binding MaxTemp}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Время" Labels="{Binding Labels}" FontSize="15"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+                            </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.Column="2" HorizontalAlignment="Right">
 
