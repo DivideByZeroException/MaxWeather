@@ -35,7 +35,12 @@ namespace MaxWeather
             InitializeComponent();
             citySearchTextBox.Text = "Поиск города";
             today.Content = "Сегодня " + $"{DateTime.Now:f}";
-            next_day_two_label.Content =  $"{DateTime.Now:f}";
+            next_day_two_label.Content = DateTime.Now.AddDays(2). ToString("dd.MM.yyyy");
+            next_day_three_label.Content = DateTime.Now.AddDays(3). ToString("dd.MM.yyyy");
+            next_day_four_label.Content = DateTime.Now.AddDays(4). ToString("dd.MM.yyyy");
+            next_day_five_label.Content = DateTime.Now.AddDays(5). ToString("dd.MM.yyyy");
+            next_day_six_label.Content = DateTime.Now.AddDays(6). ToString("dd.MM.yyyy");
+            next_day_seven_label.Content = DateTime.Now.AddDays(7). ToString("dd.MM.yyyy");
             var temps = new ChartValues<int> { -12, -8, -7, -5, -5, -6, -8, -10, -13 };
 
             SeriesCollection = new SeriesCollection
@@ -133,7 +138,17 @@ namespace MaxWeather
             }
         }
 
-      
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           SingupWindow singupWindow = new SingupWindow();
+            singupWindow.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SigninWindow singinWindow = new SigninWindow();
+            singinWindow.Show();
+        }
     }
     
 }
