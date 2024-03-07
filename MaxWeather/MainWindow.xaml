@@ -243,9 +243,46 @@
 
                     </Grid>
                 </Grid>
-                <Border  Background="#B7FF5E" Margin="0,100,0,0">
+                <Border  Background="#92D690" Margin="0,100,0,0">
                     <StackPanel Margin="20">
                         <Label Content="Погода"></Label>
+                        <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <Label Content="Завтра" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                            <Image Source="Images/Weather/day_sun_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                            <Label Content="-5°" FontSize="30" Name="next_day_one" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                        </StackPanel>
+                        <StackPanel>
+                            <Label Content="Послезавтра" Name="next_day_two_label" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                            <Image Source="Images/Weather/day_sun_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                            <Label Content="-5°" FontSize="30" Name="next_day_two" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                        </StackPanel>
+                            <StackPanel>
+                                <Label Content="18:00" FontSize="30"  Name="next_day_three_label"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <Image Source="Images/Weather/day_sun_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                <Label Content="-5°" FontSize="30" Name="next_day_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="18:00" FontSize="30"  VerticalAlignment="Center"  Name="next_day_four_label" HorizontalAlignment="Center"></Label>
+                                <Image Source="Images/Weather/day_sun_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                <Label Content="-5°" FontSize="30" Name="next_day_four" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="18:00" FontSize="30"  Name="next_day_five_label"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <Image Source="Images/Weather/day_sun_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                <Label Content="-5°" FontSize="30" Name="next_day_five" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="18:00" FontSize="30"  Name="next_day_six_label"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <Image Source="Images/Weather/day_sun_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                <Label Content="-5°" FontSize="30" Name="next_day_six" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="18:00" FontSize="30"   Name="next_day_seven_label" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <Image Source="Images/Weather/day_sun_and_cloud.png"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                <Label Content="-5°" FontSize="30" Name="next_day_seven" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
             </StackPanel>

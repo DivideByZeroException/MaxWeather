@@ -35,6 +35,7 @@ namespace MaxWeather
             InitializeComponent();
             citySearchTextBox.Text = "Поиск города";
             today.Content = "Сегодня " + $"{DateTime.Now:f}";
+            next_day_two_label.Content =  $"{DateTime.Now:f}";
             var temps = new ChartValues<int> { -12, -8, -7, -5, -5, -6, -8, -10, -13 };
 
             SeriesCollection = new SeriesCollection
@@ -47,11 +48,7 @@ namespace MaxWeather
 
                     Stroke = (Brush)(new BrushConverter().ConvertFrom("#B7FF5E")),
                     StrokeThickness = 3,
-                    Fill = Brushes.Transparent
-                    
-
-
-
+                    Fill = Brushes.Transparent            
         },
             };
 
