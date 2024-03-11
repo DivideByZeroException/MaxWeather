@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -42,7 +48,10 @@
       <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,11 +70,62 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cities.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conditions.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBConnection.cs" />
+    <Compile Include="Forecasts.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IUpdatableWindow.cs" />
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Roles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Session.cs" />
     <Compile Include="SigninWindow.xaml.cs">
       <DependentUpon>SigninWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SignupWindow.xaml.cs">
       <DependentUpon>SignupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Time.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Weather.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Wind.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +166,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -119,40 +186,41 @@
     <Resource Include="Images\lupa.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Weather\day_cloud.png" />
-    <Resource Include="Images\Weather\day_very_cloud.png" />
-    <Resource Include="Images\Weather\day_sun_and_cloud.png" />
-    <Resource Include="Images\Weather\night_moon.png" />
-    <Resource Include="Images\Weather\night_cloud.png" />
-    <Resource Include="Images\Weather\night_very_cloud.png" />
-    <Resource Include="Images\Weather\night_moon_and_cloud.png" />
-    <Resource Include="Images\Weather\night_very_rain.png" />
-    <Resource Include="Images\Weather\night_rain.png" />
-    <Resource Include="Images\Weather\night_snow.png" />
-    <Resource Include="Images\Weather\night_lightning.png" />
-    <Resource Include="Images\Weather\day_very_rain.png" />
-    <Resource Include="Images\Weather\day_rain.png" />
-    <Resource Include="Images\Weather\day_snow.png" />
-    <Resource Include="Images\Weather\day_lightning.png" />
-    <Resource Include="Images\Weather\day_sun.png" />
+    <Resource Include="Images\Weather\Day\cloud.png" />
+    <Resource Include="Images\Weather\Day\very_cloud.png" />
+    <Resource Include="Images\Weather\Day\clear_and_cloud.png" />
+    <Resource Include="Images\Weather\Night\clear.png" />
+    <Resource Include="Images\Weather\Night\cloud.png" />
+    <Resource Include="Images\Weather\Night\very_cloud.png" />
+    <Resource Include="Images\Weather\Night\clear_and_cloud.png" />
+    <Resource Include="Images\Weather\Night\very_rain.png" />
+    <Resource Include="Images\Weather\Night\rain.png" />
+    <Resource Include="Images\Weather\Night\snow.png" />
+    <Resource Include="Images\Weather\Night\lightning.png" />
+    <Resource Include="Images\Weather\Day\very_rain.png" />
+    <Resource Include="Images\Weather\Day\rain.png" />
+    <Resource Include="Images\Weather\Day\snow.png" />
+    <Resource Include="Images\Weather\Day\lightning.png" />
+    <Resource Include="Images\Weather\Day\clear.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-cloudy-2.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-cloudy-3.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-cloudy.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-clear.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-cloudy-2.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-cloudy-3.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-cloudy.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-rainy-2.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-rainy.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-snowy.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-night-stormy.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-rainy-2.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-rainy.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-snowy.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-stormy.svg" />
-    <Content Include="Images\WeatherSVG\danieledesantis-weather-icons-sunny.svg" />
+    <Resource Include="Images\wind.png" />
+    <Resource Include="Images\uv.png" />
+    <Resource Include="Images\humidity.png" />
+    <Resource Include="Images\barometer.png" />
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

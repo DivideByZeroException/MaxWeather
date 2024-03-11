@@ -14,15 +14,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LiveCharts;
-using LiveCharts.Wpf;
+
 
 namespace MaxWeather
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IUpdatableWindow
     {
 
         public SeriesCollection SeriesCollection { get; set; }
@@ -140,14 +139,43 @@ namespace MaxWeather
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           SingupWindow singupWindow = new SingupWindow();
+           SignupWindow singupWindow = new SignupWindow(this);
             singupWindow.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SigninWindow singinWindow = new SigninWindow();
+            SigninWindow singinWindow = new SigninWindow(this);
             singinWindow.Show();
+        }
+
+        public void UpdateWindow()
+        {
+            DataContext = this;
+            if (Session.id != null)
+            {
+                var user = DBConnection.db.Users.Where(z => z.id == Session.id).FirstOrDefault();
+                signin_btn.Visibility = Visibility.Collapsed;
+                signup_btn.Visibility = Visibility.Collapsed;
+                exit_btn.Visibility = Visibility.Visible;
+                if (user.role == 2)
+                {
+                    
+                }
+
+            }
+            else
+            {
+                signin_btn.Visibility = Visibility.Visible;
+                signup_btn.Visibility = Visibility.Visible;
+                exit_btn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void exit_btn_Click(object sender, object e)
+        {
+            Session.id = null;
+            UpdateWindow();
         }
     }
     
