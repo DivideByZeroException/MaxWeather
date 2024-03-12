@@ -109,6 +109,7 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
                 <Button x:Name="signin_btn" Content="Войти" BorderThickness="0" Width="160" Background="#92D690" Foreground="Black"  FontSize="18"  Style="{StaticResource CustomButtonStyle}" Click="Button_Click_1"/>
                 <Button x:Name="signup_btn" Content="Зарегистрироваться" BorderThickness="0" Width="230" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" Click="Button_Click" />
+                <Button x:Name="add_weather_btn" Content="Добавить прогноз" BorderThickness="0" Width="160" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" ButtonBase.Click="add_weather_btn_Click" Visibility="Collapsed"/>
                 <Button x:Name="exit_btn" Content="Выйти" BorderThickness="0" Width="160" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" ButtonBase.Click="exit_btn_Click" Visibility="Collapsed"/>
                 <Button Content="Закрыть" BorderThickness="0"  Width="160" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" Click="Close_Click"/>
             </StackPanel>

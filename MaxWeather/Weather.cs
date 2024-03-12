@@ -14,6 +14,12 @@ namespace MaxWeather
     
     public partial class Weather
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Weather()
+        {
+            this.Forecasts = new HashSet<Forecasts>();
+        }
+    
         public int id { get; set; }
         public System.DateTime day { get; set; }
         public int city { get; set; }
@@ -22,10 +28,10 @@ namespace MaxWeather
         public int wind { get; set; }
         public int speed { get; set; }
         public int uv { get; set; }
-        public int forecast { get; set; }
     
         public virtual Cities Cities { get; set; }
-        public virtual Forecasts Forecasts { get; set; }
         public virtual Wind Wind1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Forecasts> Forecasts { get; set; }
     }
 }

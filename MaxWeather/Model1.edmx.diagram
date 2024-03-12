@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6bfd2a1af6d9492881c09aa8762d1aaf" Name="Diagram1">
-        <EntityTypeShape EntityType="WeatherBaseModel.Cities" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeatherBaseModel.Conditions" Width="1.5" PointX="1.5" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeatherBaseModel.Forecasts" Width="1.5" PointX="3.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeatherBaseModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeatherBaseModel.Time" Width="1.5" PointX="1.5" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeatherBaseModel.Users" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WeatherBaseModel.Weather" Width="1.5" PointX="6" PointY="2.5" IsExpanded="true" />
+      <Diagram DiagramId="40b5f011ea4c4b98aada8187708230cc" Name="Diagram1">
+        <EntityTypeShape EntityType="WeatherBaseModel.Cities" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeatherBaseModel.Conditions" Width="1.5" PointX="1.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeatherBaseModel.Forecasts" Width="1.5" PointX="3.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeatherBaseModel.Roles" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeatherBaseModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeatherBaseModel.Time" Width="1.5" PointX="1.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeatherBaseModel.Users" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeatherBaseModel.Weather" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="WeatherBaseModel.Wind" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="WeatherBaseModel.FK_Users_Cities" ManuallyRouted="false" />
         <AssociationConnector Association="WeatherBaseModel.FK_Weather_Cities" ManuallyRouted="false" />
         <AssociationConnector Association="WeatherBaseModel.FK_Forecasts_Conditions" ManuallyRouted="false" />
         <AssociationConnector Association="WeatherBaseModel.FK_Forecasts_Time" ManuallyRouted="false" />
-        <AssociationConnector Association="WeatherBaseModel.FK_Weather_Forecasts" ManuallyRouted="false" />
+        <AssociationConnector Association="WeatherBaseModel.FK_Users_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="WeatherBaseModel.FK_Weather_Wind" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="WeatherBaseModel.Roles" Width="1.5" PointX="8.375" PointY="0.875" />
-        <AssociationConnector Association="WeatherBaseModel.FK_Users_Roles" />
+        <AssociationConnector Association="WeatherBaseModel.Weather_Forecasts" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

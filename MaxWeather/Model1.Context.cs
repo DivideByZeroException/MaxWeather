@@ -30,12 +30,12 @@ namespace MaxWeather
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<Conditions> Conditions { get; set; }
         public virtual DbSet<Forecasts> Forecasts { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Time> Time { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Weather> Weather { get; set; }
         public virtual DbSet<Wind> Wind { get; set; }
-        public virtual DbSet<Roles> Roles { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

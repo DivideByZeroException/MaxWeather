@@ -160,7 +160,7 @@ namespace MaxWeather
                 exit_btn.Visibility = Visibility.Visible;
                 if (user.role == 2)
                 {
-                    
+                    add_weather_btn.Visibility = Visibility.Visible;
                 }
 
             }
@@ -169,6 +169,7 @@ namespace MaxWeather
                 signin_btn.Visibility = Visibility.Visible;
                 signup_btn.Visibility = Visibility.Visible;
                 exit_btn.Visibility = Visibility.Collapsed;
+                add_weather_btn.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -176,6 +177,12 @@ namespace MaxWeather
         {
             Session.id = null;
             UpdateWindow();
+        }
+
+        private void add_weather_btn_Click(object sender, RoutedEventArgs e)
+        {
+            AddWeatherWindow addWeatherWindow = new AddWeatherWindow();
+            addWeatherWindow.Show();
         }
     }
     
