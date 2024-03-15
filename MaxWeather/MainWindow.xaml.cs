@@ -2,6 +2,7 @@
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Data.Entity;
 
 namespace MaxWeather
 {
@@ -32,6 +33,7 @@ namespace MaxWeather
         public MainWindow()
         {
             InitializeComponent();
+            UpdateWindow();
             citySearchTextBox.Text = "Поиск города";
             today.Content = "Сегодня " + $"{DateTime.Now:f}";
             next_day_two_label.Content = DateTime.Now.AddDays(2). ToString("dd.MM.yyyy");
@@ -40,45 +42,7 @@ namespace MaxWeather
             next_day_five_label.Content = DateTime.Now.AddDays(5). ToString("dd.MM.yyyy");
             next_day_six_label.Content = DateTime.Now.AddDays(6). ToString("dd.MM.yyyy");
             next_day_seven_label.Content = DateTime.Now.AddDays(7). ToString("dd.MM.yyyy");
-            var temps = new ChartValues<int> { -12, -8, -7, -5, -5, -6, -8, -10, -13 };
-
-            SeriesCollection = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Title="Температура",
-                    Values = temps,
-                    PointGeometrySize= 20,
-
-                    Stroke = (Brush)(new BrushConverter().ConvertFrom("#B7FF5E")),
-                    StrokeThickness = 3,
-                    Fill = Brushes.Transparent            
-        },
-            };
-
-            weather.AxisX = new LiveCharts.Wpf.AxesCollection()
-
-{
-    new LiveCharts.Wpf.Axis()
-    {
-        Title= "Время",
-        Separator = new LiveCharts.Wpf.Separator()
-        {
-            Step = 1.0,
-            IsEnabled = false
-
-        },
-        FontSize=15
-        
-
-    }
-};         
-            Labels = new[] { "0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00", "24:00" };
-            weather.AxisX.First().Labels = Labels;
            
-
-            YFormatter = value => value + "°";
-            DataContext = this;
 
           
 
@@ -151,6 +115,121 @@ namespace MaxWeather
 
         public void UpdateWindow()
         {
+            int current_city = 1;
+            if (Session.id != null && DBConnection.db.Users.Where(z => z.id == Session.id).FirstOrDefault().city!=null)
+            {
+                current_city = (int)DBConnection.db.Users.Where(z => z.id == Session.id).FirstOrDefault().city;
+            }
+                var weather = DBConnection.db.Weather.Where(z => z.day== DbFunctions.TruncateTime(DateTime.Today)).Where(y=>y.city==current_city).FirstOrDefault();
+            if (weather != null)
+            {
+
+
+
+
+
+                today_temp.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature.ToString();
+                city.Content = DBConnection.db.Cities.Where(z => z.id == weather.city).FirstOrDefault().title.ToString();
+                today_pressure.Content = "Давление " + weather.pressure.ToString();
+                today_humidity.Content = "Влажность " + weather.humidity.ToString();
+                today_uv.Content = "Ульрафиолетовый индекс " + weather.uv.ToString();
+                today_wind.Content = "Ветер " + DBConnection.db.Wind.Where(z => z.id == weather.wind).FirstOrDefault().direction.ToString() + " " + weather.speed.ToString() + " м/с";
+                var times = weather.Forecasts.ToList();
+                time_zero.Content =times.Where(z=>z.time==1).FirstOrDefault().temperature.ToString();
+                time_three.Content =times.Where(z=>z.time==2).FirstOrDefault().temperature.ToString();
+                time_six.Content =times.Where(z=>z.time==3).FirstOrDefault().temperature.ToString();
+                time_nine.Content =times.Where(z=>z.time==4).FirstOrDefault().temperature.ToString();
+                time_twelve.Content =times.Where(z=>z.time==5).FirstOrDefault().temperature.ToString();
+                time_fifty.Content =times.Where(z=>z.time==6).FirstOrDefault().temperature.ToString();
+                time_eighty.Content =times.Where(z=>z.time==7).FirstOrDefault().temperature.ToString();
+                time_twentyone.Content =times.Where(z=>z.time==8).FirstOrDefault().temperature.ToString();
+                time_twentyfour.Content =times.Where(z=>z.time==9).FirstOrDefault().temperature.ToString();
+
+                int cond = times.Where(x => x.time == 1).FirstOrDefault().condition;
+                var img = DBConnection.db.Conditions.Where(z=>z.id== cond).FirstOrDefault().image;
+                time_zero_img.Source  = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Night/" + img));
+
+                cond = times.Where(x => x.time == 2).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                time_three_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Night/" + img));
+
+                cond = times.Where(x => x.time == 3).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                time_six_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Night/" + img));
+
+                cond = times.Where(x => x.time == 4).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                time_nine_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+
+
+                cond = times.Where(x => x.time == 5).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                time_twelve_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+                today_img.Source= new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+
+                cond = times.Where(x => x.time == 6).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                time_fifty_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+
+                cond = times.Where(x => x.time == 7).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                time_eighty_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+
+                cond = times.Where(x => x.time == 8).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                time_twentyone_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Night/" + img));
+
+                cond = times.Where(x => x.time == 9).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                time_twentyfour_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Night/" + img));
+
+                var temps = new ChartValues<int> { times.Where(z => z.time == 1).FirstOrDefault().temperature, times.Where(z => z.time == 2).FirstOrDefault().temperature,
+                    times.Where(z => z.time == 3).FirstOrDefault().temperature, times.Where(z => z.time == 4).FirstOrDefault().temperature, times.Where(z => z.time == 5).FirstOrDefault().temperature, 
+                    times.Where(z => z.time == 6).FirstOrDefault().temperature, times.Where(z => z.time == 7).FirstOrDefault().temperature, times.Where(z => z.time == 8).FirstOrDefault().temperature, times.Where(z => z.time ==9).FirstOrDefault().temperature };
+
+                SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title="Температура",
+                    Values = temps,
+                    PointGeometrySize= 20,
+
+                    Stroke = (Brush)(new BrushConverter().ConvertFrom("#B7FF5E")),
+                    StrokeThickness = 3,
+                    Fill = Brushes.Transparent
+        },
+            };
+
+                weather_chart.AxisX = new LiveCharts.Wpf.AxesCollection()
+
+{
+    new LiveCharts.Wpf.Axis()
+    {
+        Title= "Время",
+        Separator = new LiveCharts.Wpf.Separator()
+        {
+            Step = 1.0,
+            IsEnabled = false
+
+        },
+        FontSize=15
+
+
+    }
+};
+                Labels = new[] { "0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00", "24:00" };
+                weather_chart.AxisX.First().Labels = Labels;
+
+
+                YFormatter = value => value + "°";
+                DataContext = this;
+            }
+            else
+            {
+                today_temp.Content = "Н/Д";
+                city.Content = "Н/Д";
+            }
             DataContext = this;
             if (Session.id != null)
             {

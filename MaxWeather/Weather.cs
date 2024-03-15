@@ -33,5 +33,6 @@ namespace MaxWeather
         public virtual Wind Wind1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Forecasts> Forecasts { get; set; }
+        public virtual Wind Wind11 { get; set; }
     }
 }

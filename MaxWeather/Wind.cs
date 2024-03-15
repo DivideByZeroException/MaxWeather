@@ -18,6 +18,7 @@ namespace MaxWeather
         public Wind()
         {
             this.Weather = new HashSet<Weather>();
+            this.Weather1 = new HashSet<Weather>();
         }
     
         public int id { get; set; }
@@ -25,5 +26,7 @@ namespace MaxWeather
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Weather> Weather { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Weather> Weather1 { get; set; }
     }
 }

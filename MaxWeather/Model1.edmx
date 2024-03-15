@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище WeatherBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище WeatherBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cities">
           <Key>
             <PropertyRef Name="id" />
@@ -176,7 +176,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Weather_Wind">
+        <Association Name="FK_Weather_Wind1">
           <End Role="Wind" Type="Self.Wind" Multiplicity="1" />
           <End Role="Weather" Type="Self.Weather" Multiplicity="*" />
           <ReferentialConstraint>
@@ -184,7 +184,7 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Weather">
-              <PropertyRef Name="speed" />
+              <PropertyRef Name="wind" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -258,13 +258,12 @@
             <End Role="Weather" EntitySet="Weather" />
             <End Role="Weather_Forecasts" EntitySet="Weather_Forecasts" />
           </AssociationSet>
-          <AssociationSet Name="FK_Weather_Wind" Association="Self.FK_Weather_Wind">
+          <AssociationSet Name="FK_Weather_Wind1" Association="Self.FK_Weather_Wind1">
             <End Role="Wind" EntitySet="Wind" />
             <End Role="Weather" EntitySet="Weather" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WeatherBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -352,6 +351,7 @@
           <NavigationProperty Name="Cities" Relationship="Self.FK_Weather_Cities" FromRole="Weather" ToRole="Cities" />
           <NavigationProperty Name="Wind1" Relationship="Self.FK_Weather_Wind" FromRole="Weather" ToRole="Wind" />
           <NavigationProperty Name="Forecasts" Relationship="Self.Weather_Forecasts" FromRole="Weather" ToRole="Forecasts" />
+          <NavigationProperty Name="Wind11" Relationship="WeatherBaseModel.FK_Weather_Wind1" FromRole="Weather" ToRole="Wind" />
         </EntityType>
         <EntityType Name="Wind">
           <Key>
@@ -360,6 +360,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="direction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Weather" Relationship="Self.FK_Weather_Wind" FromRole="Wind" ToRole="Weather" />
+          <NavigationProperty Name="Weather1" Relationship="WeatherBaseModel.FK_Weather_Wind1" FromRole="Wind" ToRole="Weather" />
         </EntityType>
         <Association Name="FK_Users_Cities">
           <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
@@ -505,6 +506,10 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_Weather_Wind1" Association="WeatherBaseModel.FK_Weather_Wind1">
+            <End Role="Wind" EntitySet="Wind" />
+            <End Role="Weather" EntitySet="Weather" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -517,6 +522,18 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <Association Name="FK_Weather_Wind1">
+          <End Type="WeatherBaseModel.Wind" Role="Wind" Multiplicity="1" />
+          <End Type="WeatherBaseModel.Weather" Role="Weather" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wind">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Weather">
+              <PropertyRef Name="wind" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

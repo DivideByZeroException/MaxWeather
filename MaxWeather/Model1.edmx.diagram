@@ -21,6 +21,7 @@
         <AssociationConnector Association="WeatherBaseModel.FK_Users_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="WeatherBaseModel.FK_Weather_Wind" ManuallyRouted="false" />
         <AssociationConnector Association="WeatherBaseModel.Weather_Forecasts" ManuallyRouted="false" />
+        <AssociationConnector Association="WeatherBaseModel.FK_Weather_Wind1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
