@@ -135,7 +135,7 @@
                             </StackPanel>
                     
                         </StackPanel>
-                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Name="temp_stack">
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Margin="10,0">
                                     <Label Content="0:00" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>

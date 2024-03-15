@@ -126,7 +126,7 @@ namespace MaxWeather
 
 
 
-
+                temp_stack.Visibility = Visibility.Visible;
 
                 today_temp.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature.ToString();
                 city.Content = DBConnection.db.Cities.Where(z => z.id == weather.city).FirstOrDefault().title.ToString();
@@ -228,7 +228,12 @@ namespace MaxWeather
             else
             {
                 today_temp.Content = "Н/Д";
-                city.Content = "Н/Д";
+                city.Content = "Выберите город";
+                today_pressure.Content = "Н/Д";
+                today_humidity.Content = "Н/Д";
+                today_wind.Content = "Н/Д";
+                today_uv.Content = "Н/Д";
+                temp_stack.Visibility = Visibility.Hidden;
             }
             DataContext = this;
             if (Session.id != null)
@@ -260,7 +265,7 @@ namespace MaxWeather
 
         private void add_weather_btn_Click(object sender, RoutedEventArgs e)
         {
-            AddWeatherWindow addWeatherWindow = new AddWeatherWindow();
+            AddWeatherWindow addWeatherWindow = new AddWeatherWindow(this);
             addWeatherWindow.Show();
         }
     }

@@ -25,9 +25,11 @@ namespace MaxWeather
         private List<string> weathers = null;
         private List<Cities> citiesList = DBConnection.db.Cities.ToList();
         private List<string> cities = null;
-        public AddWeatherWindow()
+        IUpdatableWindow updatableWindow = null;
+        public AddWeatherWindow(IUpdatableWindow window)
         {
             InitializeComponent();
+            updatableWindow = window;
             weathers = weatherList.Select(z => z.title).ToList();
             cities = citiesList.Select(z => z.title).ToList();
             winds = windList.Select(z => z.direction).ToList();
@@ -461,6 +463,9 @@ namespace MaxWeather
                 weather.Forecasts = forecasts;
                 DBConnection.db.Weather.Add(weather);
                 DBConnection.db.SaveChanges();
+                updatableWindow.UpdateWindow();
+                this.Close();
+
             }
             else
             {
