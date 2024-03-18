@@ -339,7 +339,8 @@ namespace MaxWeather
                 new LineSeries
                 {
                     
-                    
+                    Values = new ChartValues<int>{},
+
                 },
                
             };
@@ -359,6 +360,7 @@ namespace MaxWeather
 };
 
             DataContext = this;
+            clearDiagram();
 
         }
         private void clearDiagram()
@@ -379,10 +381,10 @@ namespace MaxWeather
                 {
                     Title="Температура",
                     Values = temps,
-                    PointGeometrySize= 10,
+                    PointGeometrySize= 20,
 
                     Stroke = (Brush)(new BrushConverter().ConvertFrom("#B7FF5E")),
-                    StrokeThickness = 2,
+                    StrokeThickness = 3,
                     Fill = Brushes.Transparent
         
             });
