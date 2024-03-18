@@ -398,8 +398,8 @@ namespace MaxWeather
         }
         private void edit_weather_btn_Click(object sender, RoutedEventArgs e)
         {
-            AddWeatherWindow addWeatherWindow = new AddWeatherWindow(this);
-            addWeatherWindow.Show();
+            EditWindow editWindow = new EditWindow(this);
+            editWindow.Show();
         }
 
         private void find_city_btn_Click(object sender, RoutedEventArgs e)

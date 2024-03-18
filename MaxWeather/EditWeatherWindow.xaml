@@ -1,0 +1,272 @@
+﻿<Window x:Class="MaxWeather.EditWeatherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaxWeather"
+        mc:Ignorable="d"
+        Title="EditWeatherWindow" Height="1080" Width="1920" WindowStyle="None" WindowState="Maximized" AllowsTransparency="True">
+    <Window.Background>
+        <SolidColorBrush Opacity="0.7" Color="White"/>
+    </Window.Background>
+    <Window.Resources>
+        <Style x:Key="CustomListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#B7FF5E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="CustomTextBoxStyle">
+            <Setter Property="BorderBrush" Value="#92D690"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="SelectionBrush" Value="#FF333333"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#B7FF5E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border Padding="30,10" Background="#92D690" BorderBrush="Black" BorderThickness="3">
+                <StackPanel >
+
+                    <Label Content="Добавить прогноз" FontSize="25" Margin="10" HorizontalAlignment="Center"></Label>
+                    
+                    
+                    <Grid  Margin="5" Panel.ZIndex="-1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Давление: " FontSize="25" Grid.Column="0"></Label>
+                        <TextBox x:Name="pressure_box" Width="200" VerticalAlignment="Center"  FontSize="22" Padding="10"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}"/>
+                    </Grid>
+                    <Grid  Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Влажность: " FontSize="25" Grid.Column="0"></Label>
+                        <TextBox x:Name="humidity_box" Width="200" VerticalAlignment="Center"  FontSize="22" Padding="10"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}"/>
+                    </Grid>
+                    <Grid  Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Ветер: " FontSize="25" Grid.Column="0"  VerticalAlignment="Bottom"></Label>
+                        <TextBox x:Name="wind_box" Width="100" VerticalAlignment="Center"  FontSize="22" Padding="10"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,10,0"/>
+                        <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Stretch" >
+                            <TextBox x:Name="windSearchTextBox" Width="200" TextChanged="WindSearchTextBox_TextChanged"    FontSize="18" Padding="10" Style="{StaticResource CustomTextBoxStyle}" />
+                        </StackPanel>
+                        <Canvas  Grid.Column="2" VerticalAlignment="Bottom"  Panel.ZIndex="1" >
+                            <ListBox FontSize="15" x:Name="suggestionsListBox" Visibility="Collapsed" MaxHeight="100"  Canvas.Top= "0"  Width="200" BorderBrush="White" BorderThickness="0" SelectionChanged="SuggestionsListBox_SelectionChanged" >
+                                <ListBox.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </Canvas>
+
+                    </Grid>
+                    <Grid  Margin="5"  Panel.ZIndex="-1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Ульрафиолетовый индекс: " FontSize="25" Grid.Column="0" Panel.ZIndex="-1"></Label>
+                        <TextBox x:Name="uv_box" Width="100" VerticalAlignment="Center"  FontSize="22" Padding="10"  Panel.ZIndex="-1"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Margin="5,0" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center"  Panel.ZIndex="-1">
+                            <Label Content="0:00" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="-1"></Label>
+                            <TextBox x:Name="weather0_box" Width="100" VerticalAlignment="Center"  FontSize="12" Padding="8"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Stretch" Panel.ZIndex="1">
+                                <TextBox x:Name="weather0"  TextChanged="Weather0SearchTextBox_TextChanged"    FontSize="12" Padding="8" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Center" Width="100" />
+                            </StackPanel>
+                            <Canvas  Grid.Column="2" VerticalAlignment="Bottom"  Panel.ZIndex="1" >
+                                <ListBox FontSize="10" x:Name="weather0ListBox" Visibility="Collapsed" MaxHeight="100"  Canvas.Top= "0"  Width="100" BorderBrush="White" BorderThickness="0" SelectionChanged="Suggestions0ListBox_SelectionChanged" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Canvas>
+                        </StackPanel>
+
+                        <StackPanel Margin="5,0" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"  Panel.ZIndex="-1">
+                            <Label Content="3:00" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="-1"></Label>
+                            <TextBox x:Name="weather3_box" Width="100" VerticalAlignment="Center"  FontSize="12" Padding="8"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Stretch" Panel.ZIndex="1">
+                                <TextBox x:Name="weather3"  TextChanged="Weather3SearchTextBox_TextChanged"    FontSize="12" Padding="8" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Center" Width="100" />
+                            </StackPanel>
+                            <Canvas  Grid.Column="2" VerticalAlignment="Bottom"  Panel.ZIndex="1" >
+                                <ListBox FontSize="10" x:Name="weather3ListBox" Visibility="Collapsed" MaxHeight="100"  Canvas.Top= "0"  Width="100" BorderBrush="White" BorderThickness="0" SelectionChanged="Suggestions3ListBox_SelectionChanged" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Canvas>
+
+                        </StackPanel>
+
+                        <StackPanel Margin="5,0" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center"  Panel.ZIndex="-1">
+                            <Label Content="6:00" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="-1"></Label>
+                            <TextBox x:Name="weather6_box" Width="100" VerticalAlignment="Center"  FontSize="12" Padding="8"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Stretch" Panel.ZIndex="1" >
+                                <TextBox x:Name="weather6"  TextChanged="Weather6SearchTextBox_TextChanged"    FontSize="12" Padding="8" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Center" Width="100" />
+                            </StackPanel>
+                            <Canvas  Grid.Column="2" VerticalAlignment="Bottom"  Panel.ZIndex="1" >
+                                <ListBox FontSize="10" x:Name="weather6ListBox" Visibility="Collapsed" MaxHeight="100"  Canvas.Top= "0"  Width="100" BorderBrush="White" BorderThickness="0" SelectionChanged="Suggestions6ListBox_SelectionChanged" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Canvas>
+                        </StackPanel>
+                        <StackPanel Margin="5,0" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"  Panel.ZIndex="-2">
+                            <Label Content="9:00" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="-1"></Label>
+                            <TextBox x:Name="weather9_box" Width="100" VerticalAlignment="Center"  FontSize="12" Padding="8"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Stretch" Panel.ZIndex="1" >
+                                <TextBox x:Name="weather9"  TextChanged="Weather9SearchTextBox_TextChanged"    FontSize="12" Padding="8" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Center" Width="100" />
+                            </StackPanel>
+                            <Canvas  Grid.Column="2" VerticalAlignment="Bottom"  Panel.ZIndex="1" >
+                                <ListBox FontSize="10" x:Name="weather9ListBox" Visibility="Collapsed" MaxHeight="100"  Canvas.Top= "0"  Width="100" BorderBrush="White" BorderThickness="0" SelectionChanged="Suggestions9ListBox_SelectionChanged" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Canvas>
+                        </StackPanel>
+
+                        <StackPanel Margin="5,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"  Panel.ZIndex="-2">
+                            <Label Content="12:00" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="-1"></Label>
+                            <TextBox x:Name="weather12_box" Width="100" VerticalAlignment="Center"  FontSize="12" Padding="8"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Stretch" Panel.ZIndex="1" >
+                                <TextBox x:Name="weather12"  TextChanged="Weather12SearchTextBox_TextChanged"    FontSize="12" Padding="8" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Center" Width="100" />
+                            </StackPanel>
+                            <Canvas  Grid.Column="2" VerticalAlignment="Bottom"  Panel.ZIndex="1" >
+                                <ListBox FontSize="10" x:Name="weather12ListBox" Visibility="Collapsed" MaxHeight="100"  Canvas.Top= "0"  Width="100" BorderBrush="White" BorderThickness="0" SelectionChanged="Suggestions12ListBox_SelectionChanged" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Canvas>
+                        </StackPanel>
+
+                        <StackPanel Margin="5,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center"  Panel.ZIndex="-2">
+                            <Label Content="15:00" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="-1"></Label>
+                            <TextBox x:Name="weather15_box" Width="100" VerticalAlignment="Center"  FontSize="12" Padding="8"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Stretch" Panel.ZIndex="1" >
+                                <TextBox x:Name="weather15"  TextChanged="Weather15SearchTextBox_TextChanged"    FontSize="12" Padding="8" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Center" Width="100" />
+                            </StackPanel>
+                            <Canvas  Grid.Column="2" VerticalAlignment="Bottom"  Panel.ZIndex="1" >
+                                <ListBox FontSize="10" x:Name="weather15ListBox" Visibility="Collapsed" MaxHeight="100"  Canvas.Top= "0"  Width="100" BorderBrush="White" BorderThickness="0" SelectionChanged="Suggestions15ListBox_SelectionChanged" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Canvas>
+                        </StackPanel>
+                        <StackPanel Margin="5,0" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center"  Panel.ZIndex="-3">
+
+                            <Label Content="18:00" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="-1"></Label>
+                            <TextBox x:Name="weather18_box" Width="100" VerticalAlignment="Center"  FontSize="12" Padding="8"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Stretch" Panel.ZIndex="1" >
+                                <TextBox x:Name="weather18"  TextChanged="Weather18SearchTextBox_TextChanged"    FontSize="12" Padding="8" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Center" Width="100" />
+                            </StackPanel>
+                            <Canvas  Grid.Column="2" VerticalAlignment="Bottom"  Panel.ZIndex="1" >
+                                <ListBox FontSize="10" x:Name="weather18ListBox" Visibility="Collapsed" MaxHeight="100"  Canvas.Top= "0"  Width="100" BorderBrush="White" BorderThickness="0" SelectionChanged="Suggestions18ListBox_SelectionChanged" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Canvas>
+                        </StackPanel>
+                        <StackPanel Margin="5,0" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center"  Panel.ZIndex="-3">
+                            <Label Content="21:00" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="-1"></Label>
+                            <TextBox x:Name="weather21_box" Width="100" VerticalAlignment="Center"  FontSize="12" Padding="8"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Stretch"  Panel.ZIndex="1">
+                                <TextBox x:Name="weather21"  TextChanged="Weather21SearchTextBox_TextChanged"    FontSize="12" Padding="8" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Center" Width="100" />
+                            </StackPanel>
+                            <Canvas  Grid.Column="2" VerticalAlignment="Bottom"  Panel.ZIndex="1" >
+                                <ListBox FontSize="10" x:Name="weather21ListBox" Visibility="Collapsed" MaxHeight="100"  Canvas.Top= "0"  Width="100" BorderBrush="White" BorderThickness="0" SelectionChanged="Suggestions21ListBox_SelectionChanged" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Canvas>
+                        </StackPanel>
+                        <StackPanel Margin="5,0" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center"  Panel.ZIndex="-3">
+                            <Label Content="24:00" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="-1"></Label>
+                            <TextBox x:Name="weather24_box" Width="100" VerticalAlignment="Center"  FontSize="12" Padding="8"  Grid.Column="1" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Stretch" Panel.ZIndex="1">
+                                <TextBox x:Name="weather24"  TextChanged="Weather24SearchTextBox_TextChanged"    FontSize="12" Padding="8" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Center" Width="100" />
+                            </StackPanel>
+                            <Canvas  Grid.Column="2" VerticalAlignment="Bottom"  Panel.ZIndex="1" >
+                                <ListBox FontSize="10" x:Name="weather24ListBox" Visibility="Collapsed" MaxHeight="100"  Canvas.Top= "0"  Width="100" BorderBrush="White" BorderThickness="0" SelectionChanged="Suggestions24ListBox_SelectionChanged" >
+                                    <ListBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource CustomListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Canvas>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Background="White" Margin="10" Visibility="Collapsed" Name="error" Panel.ZIndex="-4">
+                        <Label Content="Ошибка" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Foreground="Red"></Label>
+                    </Grid>
+                    <Button x:Name="save" Content="Сохранить" Style="{StaticResource CustomButtonStyle}" Background="White"  FontSize="20" Margin="5" Height="50" Panel.ZIndex="-4" Click="save_Click"></Button>
+
+                    <Button Content="Закрыть" Style="{StaticResource CustomButtonStyle}" Background="White" FontSize="20" Margin="5" Height="50" Click="Button_Click" ></Button>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+    </Grid>
+</Window>
