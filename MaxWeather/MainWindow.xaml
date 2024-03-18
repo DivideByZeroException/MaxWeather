@@ -92,7 +92,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBox x:Name="citySearchTextBox" Width="200" TextChanged="CitySearchTextBox_TextChanged" VerticalAlignment="Center"  FontSize="18" Padding="10" Style="{StaticResource CustomTextBoxStyle}" GotFocus="citySearchTextBox_GotFocus" LostFocus="citySearchTextBox_LostFocus"/>
 
-                        <Button Background="White" Height="auto" BorderBrush="#92D690" BorderThickness="0,0.5,0,0" Style="{StaticResource FindButtonStyle}">
+                        <Button Background="White" Height="auto" BorderBrush="#92D690" BorderThickness="0,0.5,0,0" Style="{StaticResource FindButtonStyle}" Name="find_city_btn" Click="find_city_btn_Click" >
                             <Image Source="Images/lupa.png"  Width="35" Height="35" />
                         </Button>
                     </StackPanel>
@@ -109,7 +109,8 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
                 <Button x:Name="signin_btn" Content="Войти" BorderThickness="0" Width="160" Background="#92D690" Foreground="Black"  FontSize="18"  Style="{StaticResource CustomButtonStyle}" Click="Button_Click_1"/>
                 <Button x:Name="signup_btn" Content="Зарегистрироваться" BorderThickness="0" Width="230" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" Click="Button_Click" />
-                <Button x:Name="add_weather_btn" Content="Добавить прогноз" BorderThickness="0" Width="160" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" ButtonBase.Click="add_weather_btn_Click" Visibility="Collapsed"/>
+                <Button x:Name="add_weather_btn" Content="Добавить прогноз" BorderThickness="0" Width="180" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" ButtonBase.Click="add_weather_btn_Click" Visibility="Collapsed"/>
+                <Button x:Name="edit_weather_btn" Content="Редактировать прогноз" BorderThickness="0" Width="200" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" ButtonBase.Click="edit_weather_btn_Click" Visibility="Collapsed"/>
                 <Button x:Name="exit_btn" Content="Выйти" BorderThickness="0" Width="160" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" ButtonBase.Click="exit_btn_Click" Visibility="Collapsed"/>
                 <Button Content="Закрыть" BorderThickness="0"  Width="160" Background="#92D690" Foreground="Black"  FontSize="18" Style="{StaticResource CustomButtonStyle}" Click="Close_Click"/>
             </StackPanel>
@@ -251,37 +252,37 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel Margin="10,0">
                                 <Label Content="Завтра" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/clear.png"  Width="55" Height="55" VerticalAlignment="Center"/>
+                                <Image Source="Images/Weather/Day/clear.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_one_img"/>
                             <Label Content="-5°" FontSize="35" Name="next_day_one" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                         </StackPanel>
                             <StackPanel Margin="10,0">
                                 <Label Content="Послезавтра" Name="next_day_two_label" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/snow.png"  Width="55" Height="55" VerticalAlignment="Center"/>
+                                <Image Source="Images/Weather/Day/clear.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_two_img"/>
                             <Label Content="-5°" FontSize="35" Name="next_day_two" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                         </StackPanel>
                            <StackPanel Margin="10,0">
                                 <Label Content="3 день" FontSize="30"  Name="next_day_three_label"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/rain.png"  Width="55" Height="55" VerticalAlignment="Center"/>
+                                <Image Source="Images/Weather/Day/clear.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_three_img"/>
                                 <Label Content="-5°" FontSize="35" Name="next_day_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                             </StackPanel>
                             <StackPanel Margin="10,0">
                                 <Label Content="4 день" FontSize="30"  VerticalAlignment="Center"  Name="next_day_four_label" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/clear.png"  Width="55" Height="55" VerticalAlignment="Center"/>
+                                <Image Source="Images/Weather/Day/clear.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_four_img"/>
                                 <Label Content="-5°" FontSize="35" Name="next_day_four" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                             </StackPanel>
                             <StackPanel Margin="10,0">
                                 <Label Content="5 день" FontSize="30"  Name="next_day_five_label"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/lightning.png"  Width="55" Height="55" VerticalAlignment="Center"/>
+                                <Image Source="Images/Weather/Day/lightning.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_five_img"/>
                                 <Label Content="-25°" FontSize="35" Name="next_day_five" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                             </StackPanel>
                             <StackPanel Margin="10,0">
                                 <Label Content="6 день" FontSize="30"  Name="next_day_six_label"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/very_cloud.png"  Width="55" Height="55" VerticalAlignment="Center"/>
+                                <Image Source="Images/Weather/Day/very_cloud.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_six_img"/>
                                 <Label Content="-5°" FontSize="35" Name="next_day_six" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                             </StackPanel>
                             <StackPanel Margin="10,0">
                                 <Label Content="7 день" FontSize="30"   Name="next_day_seven_label" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/very_rain.png"  Width="55" Height="55" VerticalAlignment="Center"/>
+                                <Image Source="Images/Weather/Day/very_rain.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_seven_img"/>
                                 <Label Content="-5°" FontSize="35" Name="next_day_seven" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                             </StackPanel>
                         </StackPanel>

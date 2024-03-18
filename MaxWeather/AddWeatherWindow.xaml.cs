@@ -316,7 +316,7 @@ namespace MaxWeather
                     matched.Add(weather);
                 }
             }
-            if (matched.Count > 0 && weather6.Text != "")
+            if (matched.Count > 0 && weather18.Text != "")
             {
 
                 weather18ListBox.ItemsSource = matched;
@@ -400,11 +400,16 @@ namespace MaxWeather
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
+           
             if (date.Text != null && citySearchTextBox.Text!="" && pressure_box.Text!="" && humidity_box.Text!=""&& wind_box.Text!="" && windSearchTextBox.Text!="" && uv_box.Text!="" && weather0_box.Text!="" && weather0.Text!=""
                 && weather3_box.Text != "" && weather3.Text != "" && weather6_box.Text != "" && weather6.Text != "" && weather9_box.Text != "" && weather9.Text != "" && weather12_box.Text != "" && weather12.Text != ""
                 && weather15_box.Text != "" && weather15.Text != "" && weather18_box.Text != "" && weather18.Text != "" && weather21_box.Text != "" && weather21.Text != "" && weather24_box.Text != "" && weather24.Text != "")
             {
-                Forecasts[] forecasts = new Forecasts[9] {
+                var city = citiesList.Where(z => z.title == citySearchTextBox.Text).FirstOrDefault().id;
+                var is_exist = DBConnection.db.Weather.Where(z => z.day == date.SelectedDate).Where(x => x.city == city).FirstOrDefault();
+                if (is_exist == null)
+                {
+                    Forecasts[] forecasts = new Forecasts[9] {
 
                     new Forecasts(){
                     time = 1,
@@ -452,20 +457,24 @@ namespace MaxWeather
                     condition = weatherList.Where(z=>z.title==weather24.Text).FirstOrDefault().id
                     }
                 };
-                Weather weather = new Weather();
-                weather.pressure = Int32.Parse(pressure_box.Text);
-                weather.humidity = Int32.Parse(humidity_box.Text);
-                weather.city = citiesList.Where(z => z.title == citySearchTextBox.Text).FirstOrDefault().id;
-                weather.day = (DateTime) date.SelectedDate;
-                weather.wind = windList.Where(z => z.direction == windSearchTextBox.Text).FirstOrDefault().id;
-                weather.speed = Int32.Parse(wind_box.Text);
-                weather.uv = Int32.Parse(uv_box.Text);
-                weather.Forecasts = forecasts;
-                DBConnection.db.Weather.Add(weather);
-                DBConnection.db.SaveChanges();
-                updatableWindow.UpdateWindow();
-                this.Close();
-
+                    Weather weather = new Weather();
+                    weather.pressure = Int32.Parse(pressure_box.Text);
+                    weather.humidity = Int32.Parse(humidity_box.Text);
+                    weather.city = citiesList.Where(z => z.title == citySearchTextBox.Text).FirstOrDefault().id;
+                    weather.day = (DateTime)date.SelectedDate;
+                    weather.wind = windList.Where(z => z.direction == windSearchTextBox.Text).FirstOrDefault().id;
+                    weather.speed = Int32.Parse(wind_box.Text);
+                    weather.uv = Int32.Parse(uv_box.Text);
+                    weather.Forecasts = forecasts;
+                    DBConnection.db.Weather.Add(weather);
+                    DBConnection.db.SaveChanges();
+                    updatableWindow.UpdateWindow();
+                    this.Close();
+                }
+                else
+                {
+                    error.Visibility = Visibility.Visible;
+                }
             }
             else
             {

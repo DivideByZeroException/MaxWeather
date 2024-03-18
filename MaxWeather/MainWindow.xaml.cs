@@ -24,15 +24,16 @@ namespace MaxWeather
     /// </summary>
     public partial class MainWindow : Window, IUpdatableWindow
     {
-
+        int current_city = 1;
         public SeriesCollection SeriesCollection { get; set; }
         
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
-        private List<string> cities = new List<string> { "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань","Кострома","Киев","Кейптаун","Керчь","Калининград" }; 
+        private List<string> cities = DBConnection.db.Cities.Select(z => z.title).ToList();
         public MainWindow()
         {
             InitializeComponent();
+            createDiagram();
             UpdateWindow();
             citySearchTextBox.Text = "Поиск города";
             today.Content = "Сегодня " + $"{DateTime.Now:f}";
@@ -115,7 +116,7 @@ namespace MaxWeather
 
         public void UpdateWindow()
         {
-            int current_city = 1;
+            
             if (Session.id != null && DBConnection.db.Users.Where(z => z.id == Session.id).FirstOrDefault().city!=null)
             {
                 current_city = (int)DBConnection.db.Users.Where(z => z.id == Session.id).FirstOrDefault().city;
@@ -187,43 +188,110 @@ namespace MaxWeather
                     times.Where(z => z.time == 3).FirstOrDefault().temperature, times.Where(z => z.time == 4).FirstOrDefault().temperature, times.Where(z => z.time == 5).FirstOrDefault().temperature, 
                     times.Where(z => z.time == 6).FirstOrDefault().temperature, times.Where(z => z.time == 7).FirstOrDefault().temperature, times.Where(z => z.time == 8).FirstOrDefault().temperature, times.Where(z => z.time ==9).FirstOrDefault().temperature };
 
-                SeriesCollection = new SeriesCollection
-            {
-                new LineSeries
+
+                var time =DateTime.Today.AddDays(1);
+                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+                if (weather != null)
                 {
-                    Title="Температура",
-                    Values = temps,
-                    PointGeometrySize= 20,
+                    next_day_one.Content = weather.Forecasts.Where(z=>z.time==5).FirstOrDefault().temperature;
+                    cond = weather.Forecasts.Where(z=>z.time==5).FirstOrDefault().condition;
+                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                    next_day_one_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+                }
+                else
+                {
+                    next_day_one.Content = "Н/Д";
+                }
 
-                    Stroke = (Brush)(new BrushConverter().ConvertFrom("#B7FF5E")),
-                    StrokeThickness = 3,
-                    Fill = Brushes.Transparent
-        },
-            };
+                time = DateTime.Today.AddDays(2);
+                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+                if (weather != null)
+                {
+                    next_day_two.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                    next_day_two_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+                }
+                else
+                {
+                    next_day_two.Content = "Н/Д";
+                }
+                time = DateTime.Today.AddDays(3);
+                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+                if (weather != null)
+                {
+                    next_day_three.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                    next_day_three_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+                }
+                else
+                {
+                    next_day_three.Content = "Н/Д";
+                }
 
-                weather_chart.AxisX = new LiveCharts.Wpf.AxesCollection()
 
-{
-    new LiveCharts.Wpf.Axis()
-    {
-        Title= "Время",
-        Separator = new LiveCharts.Wpf.Separator()
-        {
-            Step = 1.0,
-            IsEnabled = false
+                time = DateTime.Today.AddDays(4);
+                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+                if (weather != null)
+                {
+                    next_day_four.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                    next_day_four_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+                }
+                else
+                {
+                    next_day_four.Content = "Н/Д";
+                }
 
-        },
-        FontSize=15
+                time = DateTime.Today.AddDays(5);
+                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+                if (weather != null)
+                {
+                    next_day_five.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                    next_day_five_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+                }
+                else
+                {
+                    next_day_five.Content = "Н/Д";
+                }
+
+                time = DateTime.Today.AddDays(6);
+                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+                if (weather != null)
+                {
+                    next_day_six.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                    next_day_six_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+                }
+                else
+                {
+                    next_day_six.Content = "Н/Д";
+                }
+
+                time = DateTime.Today.AddDays(3);
+                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+                if (weather != null)
+                {
+                    next_day_seven.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                    next_day_seven_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+                }
+                else
+                {
+                    next_day_seven.Content = "Н/Д";
+                }
 
 
-    }
-};
-                Labels = new[] { "0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00", "24:00" };
-                weather_chart.AxisX.First().Labels = Labels;
 
 
-                YFormatter = value => value + "°";
-                DataContext = this;
+
+                updateDiagram(temps);
             }
             else
             {
@@ -235,7 +303,7 @@ namespace MaxWeather
                 today_uv.Content = "Н/Д";
                 temp_stack.Visibility = Visibility.Hidden;
             }
-            DataContext = this;
+
             if (Session.id != null)
             {
                 var user = DBConnection.db.Users.Where(z => z.id == Session.id).FirstOrDefault();
@@ -245,6 +313,7 @@ namespace MaxWeather
                 if (user.role == 2)
                 {
                     add_weather_btn.Visibility = Visibility.Visible;
+                    edit_weather_btn.Visibility= Visibility.Visible;
                 }
 
             }
@@ -254,6 +323,7 @@ namespace MaxWeather
                 signup_btn.Visibility = Visibility.Visible;
                 exit_btn.Visibility = Visibility.Collapsed;
                 add_weather_btn.Visibility = Visibility.Collapsed;
+                edit_weather_btn.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -262,11 +332,89 @@ namespace MaxWeather
             Session.id = null;
             UpdateWindow();
         }
+        private void createDiagram()
+        {
+            SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    
+                    
+                },
+               
+            };
+            weather_chart.AxisX = new LiveCharts.Wpf.AxesCollection
+{
+    new LiveCharts.Wpf.Axis
+    {
+        Title = "Время",
+        Separator = new LiveCharts.Wpf.Separator
+        {
+            Step = 1.0,
+            IsEnabled = false
+        },
+        FontSize = 15,
+        Labels = new[] { "0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00", "24:00" }
+    }
+};
 
+            DataContext = this;
+
+        }
+        private void clearDiagram()
+        {
+            if (weather_chart.Series != null)
+            {
+                weather_chart.Series.Clear();
+            }
+        }
+        private void updateDiagram(ChartValues<int> temps)
+        {
+
+
+            clearDiagram();
+            SeriesCollection.Add(
+           
+                new LineSeries
+                {
+                    Title="Температура",
+                    Values = temps,
+                    PointGeometrySize= 10,
+
+                    Stroke = (Brush)(new BrushConverter().ConvertFrom("#B7FF5E")),
+                    StrokeThickness = 2,
+                    Fill = Brushes.Transparent
+        
+            });
+            YFormatter = value => value + "°";
+                DataContext = this;
+        }
         private void add_weather_btn_Click(object sender, RoutedEventArgs e)
         {
             AddWeatherWindow addWeatherWindow = new AddWeatherWindow(this);
             addWeatherWindow.Show();
+        }
+        private void edit_weather_btn_Click(object sender, RoutedEventArgs e)
+        {
+            AddWeatherWindow addWeatherWindow = new AddWeatherWindow(this);
+            addWeatherWindow.Show();
+        }
+
+        private void find_city_btn_Click(object sender, RoutedEventArgs e)
+            
+        {
+            if (citySearchTextBox.Text != "")
+            {
+                string city = citySearchTextBox.Text;
+                var cityid = DBConnection.db.Cities.Where(z => z.title.ToLower() == city.ToLower()).FirstOrDefault();
+                if (cityid != null)
+                {
+
+                    current_city = cityid.id;
+                    UpdateWindow();
+                }
+
+            }
         }
     }
     
