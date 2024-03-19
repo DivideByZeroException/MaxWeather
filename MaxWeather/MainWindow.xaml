@@ -130,9 +130,9 @@
                             <Label Content="Погода" FontSize="30" Name="city" ></Label>
                             <Label Content="Сегодня" FontSize="20" Name="today"></Label>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <Image Source="Images/Weather/Day/clear.png" Name="today_img" Width="75" Height="75" VerticalAlignment="Center"/>
-                                <Label Content="-5°" FontSize="70" Name="today_temp" VerticalAlignment="Center"></Label>
-                                <Label Content="Ясно" FontSize="20" Margin="0,0,0,0" VerticalAlignment="Center"></Label>
+                                <Image Source="Images/question.png" Name="today_img" Width="75" Height="75" VerticalAlignment="Center"/>
+                                <Label Content="°" FontSize="70" Name="today_temp" VerticalAlignment="Center"></Label>
+                                <Label Content="?" FontSize="20" Name="today_cond" Margin="0,0,0,0" VerticalAlignment="Center"></Label>
                             </StackPanel>
                     
                         </StackPanel>
@@ -140,54 +140,54 @@
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Margin="10,0">
                                     <Label Content="0:00" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                    <Image Source="Images/Weather/Night/clear.png" Name="time_zero_img"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Image Source="Images/question.png" Name="time_zero_img"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_zero" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
                                 <StackPanel Margin="10,0">
                                     <Label Content="3:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                    <Image Source="Images/Weather/Night/snow.png"  Name="time_three_img"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Image Source="Images/question.png"  Name="time_three_img"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
                                 <StackPanel Margin="10,0">
                                     <Label Content="6:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                    <Image Source="Images/Weather/Day/clear.png"  Width="45"  Name="time_six_img" Height="45" VerticalAlignment="Center"/>
+                                    <Image Source="Images/question.png"  Width="45"  Name="time_six_img" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_six" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
                                 <StackPanel Margin="10,0">
                                     <Label Content="9:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                    <Image Source="Images/Weather/Day/clear.png"  Name="time_nine_img"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Image Source="Images/question.png"  Name="time_nine_img"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_nine" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
                                 <StackPanel Margin="10,0">
                                     <Label Content="12:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                    <Image Source="Images/Weather/Day/rain.png"   Name="time_twelve_img"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Image Source="Images/question.png"   Name="time_twelve_img"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_twelve" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
                                 <StackPanel Margin="10,0">
                                     <Label Content="15:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                    <Image Source="Images/Weather/Day/cloud.png"   Name="time_fifty_img" Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Image Source="Images/question.png"   Name="time_fifty_img" Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_fifty" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
                                 <StackPanel Margin="10,0">
                                     <Label Content="18:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                    <Image Source="Images/Weather/Day/clear.png"  Name="time_eighty_img" Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Image Source="Images/question.png"  Name="time_eighty_img" Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_eighty" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
                                 <StackPanel Margin="10,0">
                                     <Label Content="21:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                    <Image Source="Images/Weather/Night/cloud.png"  Name="time_twentyone_img" Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Image Source="Images/question.png"  Name="time_twentyone_img" Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_twentyone" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
 
                                 <StackPanel  Margin="10,0">
                                     <Label Content="24:00" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                    <Image Source="Images/Weather/Night/clear_and_cloud.png"  Name="time_twentyfour_img"  Width="45" Height="45" VerticalAlignment="Center"/>
+                                    <Image Source="Images/question.png"  Name="time_twentyfour_img"  Width="45" Height="45" VerticalAlignment="Center"/>
                                     <Label Content="-5°" FontSize="30" Name="time_twentyfour" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                                 </StackPanel>
                                 
@@ -252,37 +252,37 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel Margin="10,0">
                                 <Label Content="Завтра" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/clear.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_one_img"/>
+                                <Image Source="Images/question.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_one_img"/>
                             <Label Content="-5°" FontSize="35" Name="next_day_one" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                         </StackPanel>
                             <StackPanel Margin="10,0">
                                 <Label Content="Послезавтра" Name="next_day_two_label" FontSize="30"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/clear.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_two_img"/>
+                                <Image Source="Images/question.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_two_img"/>
                             <Label Content="-5°" FontSize="35" Name="next_day_two" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                         </StackPanel>
                            <StackPanel Margin="10,0">
                                 <Label Content="3 день" FontSize="30"  Name="next_day_three_label"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/clear.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_three_img"/>
+                                <Image Source="Images/question.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_three_img"/>
                                 <Label Content="-5°" FontSize="35" Name="next_day_three" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                             </StackPanel>
                             <StackPanel Margin="10,0">
                                 <Label Content="4 день" FontSize="30"  VerticalAlignment="Center"  Name="next_day_four_label" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/clear.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_four_img"/>
+                                <Image Source="Images/question.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_four_img"/>
                                 <Label Content="-5°" FontSize="35" Name="next_day_four" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                             </StackPanel>
                             <StackPanel Margin="10,0">
                                 <Label Content="5 день" FontSize="30"  Name="next_day_five_label"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/lightning.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_five_img"/>
+                                <Image Source="Images/question.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_five_img"/>
                                 <Label Content="-25°" FontSize="35" Name="next_day_five" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                             </StackPanel>
                             <StackPanel Margin="10,0">
                                 <Label Content="6 день" FontSize="30"  Name="next_day_six_label"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/very_cloud.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_six_img"/>
+                                <Image Source="Images/question.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_six_img"/>
                                 <Label Content="-5°" FontSize="35" Name="next_day_six" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                             </StackPanel>
                             <StackPanel Margin="10,0">
                                 <Label Content="7 день" FontSize="30"   Name="next_day_seven_label" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                <Image Source="Images/Weather/Day/very_rain.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_seven_img"/>
+                                <Image Source="Images/question.png"  Width="55" Height="55" VerticalAlignment="Center" Name="next_day_seven_img"/>
                                 <Label Content="-5°" FontSize="35" Name="next_day_seven" VerticalAlignment="Center"  HorizontalAlignment="Center"></Label>
                             </StackPanel>
                         </StackPanel>

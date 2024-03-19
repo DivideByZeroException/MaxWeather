@@ -66,7 +66,7 @@
             <Border Padding="30,10" Background="#92D690" BorderBrush="Black" BorderThickness="3">
                 <StackPanel >
 
-                    <Label Content="Добавить прогноз" FontSize="25" Margin="10" HorizontalAlignment="Center"></Label>
+                    <Label Content="Редактировать прогноз" FontSize="25" Margin="10" HorizontalAlignment="Center"></Label>
                     
                     
                     <Grid  Margin="5" Panel.ZIndex="-1">

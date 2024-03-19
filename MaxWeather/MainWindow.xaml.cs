@@ -116,20 +116,23 @@ namespace MaxWeather
 
         public void UpdateWindow()
         {
-            
+            int cond;
+            string img;
             if (Session.id != null && DBConnection.db.Users.Where(z => z.id == Session.id).FirstOrDefault().city!=null)
             {
                 current_city = (int)DBConnection.db.Users.Where(z => z.id == Session.id).FirstOrDefault().city;
             }
+
                 var weather = DBConnection.db.Weather.Where(z => z.day== DbFunctions.TruncateTime(DateTime.Today)).Where(y=>y.city==current_city).FirstOrDefault();
             if (weather != null)
             {
 
-
+           
 
                 temp_stack.Visibility = Visibility.Visible;
 
                 today_temp.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature.ToString();
+                
                 city.Content = DBConnection.db.Cities.Where(z => z.id == weather.city).FirstOrDefault().title.ToString();
                 today_pressure.Content = "Давление " + weather.pressure.ToString();
                 today_humidity.Content = "Влажность " + weather.humidity.ToString();
@@ -146,8 +149,8 @@ namespace MaxWeather
                 time_twentyone.Content =times.Where(z=>z.time==8).FirstOrDefault().temperature.ToString();
                 time_twentyfour.Content =times.Where(z=>z.time==9).FirstOrDefault().temperature.ToString();
 
-                int cond = times.Where(x => x.time == 1).FirstOrDefault().condition;
-                var img = DBConnection.db.Conditions.Where(z=>z.id== cond).FirstOrDefault().image;
+                cond = times.Where(x => x.time == 1).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z=>z.id== cond).FirstOrDefault().image;
                 time_zero_img.Source  = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Night/" + img));
 
                 cond = times.Where(x => x.time == 2).FirstOrDefault().condition;
@@ -167,7 +170,7 @@ namespace MaxWeather
                 img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
                 time_twelve_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
                 today_img.Source= new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
-
+                today_cond.Content = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().title;
                 cond = times.Where(x => x.time == 6).FirstOrDefault().condition;
                 img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
                 time_fifty_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
@@ -189,104 +192,7 @@ namespace MaxWeather
                     times.Where(z => z.time == 6).FirstOrDefault().temperature, times.Where(z => z.time == 7).FirstOrDefault().temperature, times.Where(z => z.time == 8).FirstOrDefault().temperature, times.Where(z => z.time ==9).FirstOrDefault().temperature };
 
 
-                var time =DateTime.Today.AddDays(1);
-                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
-                if (weather != null)
-                {
-                    next_day_one.Content = weather.Forecasts.Where(z=>z.time==5).FirstOrDefault().temperature;
-                    cond = weather.Forecasts.Where(z=>z.time==5).FirstOrDefault().condition;
-                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
-                    next_day_one_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
-                }
-                else
-                {
-                    next_day_one.Content = "Н/Д";
-                }
-
-                time = DateTime.Today.AddDays(2);
-                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
-                if (weather != null)
-                {
-                    next_day_two.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
-                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
-                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
-                    next_day_two_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
-                }
-                else
-                {
-                    next_day_two.Content = "Н/Д";
-                }
-                time = DateTime.Today.AddDays(3);
-                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
-                if (weather != null)
-                {
-                    next_day_three.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
-                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
-                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
-                    next_day_three_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
-                }
-                else
-                {
-                    next_day_three.Content = "Н/Д";
-                }
-
-
-                time = DateTime.Today.AddDays(4);
-                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
-                if (weather != null)
-                {
-                    next_day_four.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
-                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
-                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
-                    next_day_four_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
-                }
-                else
-                {
-                    next_day_four.Content = "Н/Д";
-                }
-
-                time = DateTime.Today.AddDays(5);
-                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
-                if (weather != null)
-                {
-                    next_day_five.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
-                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
-                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
-                    next_day_five_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
-                }
-                else
-                {
-                    next_day_five.Content = "Н/Д";
-                }
-
-                time = DateTime.Today.AddDays(6);
-                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
-                if (weather != null)
-                {
-                    next_day_six.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
-                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
-                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
-                    next_day_six_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
-                }
-                else
-                {
-                    next_day_six.Content = "Н/Д";
-                }
-
-                time = DateTime.Today.AddDays(3);
-                weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
-                if (weather != null)
-                {
-                    next_day_seven.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
-                    cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
-                    img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
-                    next_day_seven_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
-                }
-                else
-                {
-                    next_day_seven.Content = "Н/Д";
-                }
-
+              
 
 
 
@@ -296,12 +202,118 @@ namespace MaxWeather
             else
             {
                 today_temp.Content = "Н/Д";
+                today_cond.Content = "Н/Д";
                 city.Content = "Выберите город";
                 today_pressure.Content = "Н/Д";
                 today_humidity.Content = "Н/Д";
                 today_wind.Content = "Н/Д";
                 today_uv.Content = "Н/Д";
                 temp_stack.Visibility = Visibility.Hidden;
+                next_day_one_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/question.png"));
+                next_day_two_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/question.png"));
+                next_day_three_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/question.png"));
+                next_day_four_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/question.png"));
+                next_day_five_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/question.png"));
+                next_day_six_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/question.png"));
+                next_day_seven_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/question.png"));
+            }
+           
+            var time = DateTime.Today.AddDays(1);
+            weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+            if (weather != null)
+            {
+                next_day_one.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                next_day_one_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+            }
+            else
+            {
+                next_day_one.Content = "Н/Д";
+            }
+
+            time = DateTime.Today.AddDays(2);
+            weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+            if (weather != null)
+            {
+                next_day_two.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                next_day_two_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+            }
+            else
+            {
+                next_day_two.Content = "Н/Д";
+            }
+            time = DateTime.Today.AddDays(3);
+            weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+            if (weather != null)
+            {
+                next_day_three.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                next_day_three_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+            }
+            else
+            {
+                next_day_three.Content = "Н/Д";
+            }
+
+
+            time = DateTime.Today.AddDays(4);
+            weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+            if (weather != null)
+            {
+                next_day_four.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                next_day_four_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+            }
+            else
+            {
+                next_day_four.Content = "Н/Д";
+            }
+
+            time = DateTime.Today.AddDays(5);
+            weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+            if (weather != null)
+            {
+                next_day_five.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                next_day_five_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+            }
+            else
+            {
+                next_day_five.Content = "Н/Д";
+            }
+
+            time = DateTime.Today.AddDays(6);
+            weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+            if (weather != null)
+            {
+                next_day_six.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                next_day_six_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+            }
+            else
+            {
+                next_day_six.Content = "Н/Д";
+            }
+
+            time = DateTime.Today.AddDays(3);
+            weather = DBConnection.db.Weather.Where(z => z.day == DbFunctions.TruncateTime(time)).Where(y => y.city == current_city).FirstOrDefault();
+            if (weather != null)
+            {
+                next_day_seven.Content = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().temperature;
+                cond = weather.Forecasts.Where(z => z.time == 5).FirstOrDefault().condition;
+                img = DBConnection.db.Conditions.Where(z => z.id == cond).FirstOrDefault().image;
+                next_day_seven_img.Source = new BitmapImage(new Uri("pack://application:,,,/MaxWeather;component/Images/Weather/Day/" + img));
+            }
+            else
+            {
+                next_day_seven.Content = "Н/Д";
             }
 
             if (Session.id != null)

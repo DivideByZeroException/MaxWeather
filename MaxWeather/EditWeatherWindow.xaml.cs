@@ -24,11 +24,40 @@ namespace MaxWeather
         private List<string> winds = null;
         private List<Conditions> weatherList = DBConnection.db.Conditions.ToList();
         private List<string> weathers = null;
-        public EditWeatherWindow()
+        IUpdatableWindow updatableWindow;
+        private Weather editableWeather;
+        public EditWeatherWindow(IUpdatableWindow window,Weather weather)
         {
             InitializeComponent();
+            updatableWindow = window;
             weathers = weatherList.Select(z => z.title).ToList();
             winds = windList.Select(z => z.direction).ToList();
+            editableWeather = weather;
+            pressure_box.Text = editableWeather.pressure.ToString();
+            humidity_box.Text = editableWeather.humidity.ToString();
+            wind_box.Text = editableWeather.speed.ToString();
+            uv_box.Text = editableWeather.uv.ToString();
+            windSearchTextBox.Text = DBConnection.db.Wind.Where(z => z.id == editableWeather.wind).FirstOrDefault().direction;
+            List<Forecasts> forecast = DBConnection.db.Weather.Where(z => z.id == weather.id).SelectMany(x => x.Forecasts).ToList();
+            weather0_box.Text = forecast.Where(z => z.time == 1).FirstOrDefault().temperature.ToString();
+            weather3_box.Text = forecast.Where(z => z.time == 2).FirstOrDefault().temperature.ToString();
+            weather6_box.Text = forecast.Where(z => z.time == 3).FirstOrDefault().temperature.ToString();
+            weather9_box.Text = forecast.Where(z => z.time == 4).FirstOrDefault().temperature.ToString();
+            weather12_box.Text = forecast.Where(z => z.time == 5).FirstOrDefault().temperature.ToString();
+            weather15_box.Text = forecast.Where(z => z.time == 6).FirstOrDefault().temperature.ToString();
+            weather18_box.Text = forecast.Where(z => z.time == 7).FirstOrDefault().temperature.ToString();
+            weather21_box.Text = forecast.Where(z => z.time == 8).FirstOrDefault().temperature.ToString();
+            weather24_box.Text = forecast.Where(z => z.time == 9).FirstOrDefault().temperature.ToString();
+            var single_forecast = forecast.Where(x => x.time == 1).FirstOrDefault().condition;
+            weather0.Text = DBConnection.db.Conditions.Where(z => z.id ==single_forecast).FirstOrDefault().title;
+            weather3.Text = DBConnection.db.Conditions.Where(z => z.id == single_forecast).FirstOrDefault().title;
+            weather6.Text = DBConnection.db.Conditions.Where(z => z.id == single_forecast).FirstOrDefault().title;
+            weather9.Text = DBConnection.db.Conditions.Where(z => z.id == single_forecast).FirstOrDefault().title;
+            weather12.Text = DBConnection.db.Conditions.Where(z => z.id == single_forecast).FirstOrDefault().title;
+            weather15.Text = DBConnection.db.Conditions.Where(z => z.id == single_forecast).FirstOrDefault().title;
+            weather18.Text = DBConnection.db.Conditions.Where(z => z.id == single_forecast).FirstOrDefault().title;
+            weather21.Text = DBConnection.db.Conditions.Where(z => z.id == single_forecast).FirstOrDefault().title;
+            weather24.Text = DBConnection.db.Conditions.Where(z => z.id == single_forecast).FirstOrDefault().title;
         }
         private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -352,12 +381,96 @@ namespace MaxWeather
         }
         private void save_Click(object sender, RoutedEventArgs e)
         {
+            if (pressure_box.Text != "" && humidity_box.Text != "" && wind_box.Text != "" && windSearchTextBox.Text != "" && uv_box.Text != "" && weather0_box.Text != "" && weather0.Text != ""
+               && weather3_box.Text != "" && weather3.Text != "" && weather6_box.Text != "" && weather6.Text != "" && weather9_box.Text != "" && weather9.Text != "" && weather12_box.Text != "" && weather12.Text != ""
+               && weather15_box.Text != "" && weather15.Text != "" && weather18_box.Text != "" && weather18.Text != "" && weather21_box.Text != "" && weather21.Text != "" && weather24_box.Text != "" && weather24.Text != "")
+            {
 
+
+                var forecasts = new Forecasts[9] {
+
+                    new Forecasts(){
+                    time = 1,
+                    temperature=Int32.Parse(weather0_box.Text),
+                    condition = weatherList.Where(z=>z.title==weather0.Text).FirstOrDefault().id
+                    },
+                    new Forecasts(){
+                    time = 2,
+                    temperature=Int32.Parse(weather3_box.Text),
+                    condition = weatherList.Where(z=>z.title==weather3.Text).FirstOrDefault().id
+                    },
+                    new Forecasts(){
+                    time = 3,
+                    temperature=Int32.Parse(weather6_box.Text),
+                    condition = weatherList.Where(z=>z.title==weather6.Text).FirstOrDefault().id
+                    },
+                    new Forecasts(){
+                    time = 4,
+                    temperature=Int32.Parse(weather9_box.Text),
+                    condition = weatherList.Where(z=>z.title==weather9.Text).FirstOrDefault().id
+                    },
+                    new Forecasts(){
+                    time = 5,
+                    temperature=Int32.Parse(weather12_box.Text),
+                    condition = weatherList.Where(z=>z.title==weather12.Text).FirstOrDefault().id
+                    },
+                    new Forecasts(){
+                    time = 6,
+                    temperature=Int32.Parse(weather15_box.Text),
+                    condition = weatherList.Where(z=>z.title==weather15.Text).FirstOrDefault().id
+                    },
+                    new Forecasts(){
+                    time = 7,
+                    temperature=Int32.Parse(weather18_box.Text),
+                    condition = weatherList.Where(z=>z.title==weather18.Text).FirstOrDefault().id
+                    },
+                    new Forecasts(){
+                    time = 8,
+                    temperature=Int32.Parse(weather21_box.Text),
+                    condition = weatherList.Where(z=>z.title==weather21.Text).FirstOrDefault().id
+                    },
+                    new Forecasts(){
+                    time = 9,
+                    temperature=Int32.Parse(weather24_box.Text),
+                    condition = weatherList.Where(z=>z.title==weather24.Text).FirstOrDefault().id
+                    }
+                    };
+
+
+                
+                Weather newweather = new Weather();
+                newweather.pressure = Int32.Parse(pressure_box.Text);
+                newweather.humidity = Int32.Parse(humidity_box.Text);
+                newweather.city = editableWeather.city;
+                newweather.day = editableWeather.day;
+                newweather.wind = windList.Where(z => z.direction == windSearchTextBox.Text).FirstOrDefault().id;
+                newweather.speed = Int32.Parse(wind_box.Text);
+                newweather.uv = Int32.Parse(uv_box.Text);
+                newweather.Forecasts = forecasts;
+
+
+
+
+                DBConnection.db.Weather.Add(newweather);
+                var forecastsremove = DBConnection.db.Weather.Where(z => z.id == editableWeather.id).SelectMany(x => x.Forecasts).ToList();
+           
+                DBConnection.db.Weather.Remove(editableWeather);
+                DBConnection.db.Forecasts.RemoveRange(forecastsremove);
+
+                DBConnection.db.SaveChanges();
+                updatableWindow.UpdateWindow();
+                this.Close();
+            }
+
+            else
+            {
+                error.Visibility = Visibility.Visible;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

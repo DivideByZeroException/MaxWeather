@@ -61,8 +61,19 @@ namespace MaxWeather
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
 
+        {
+            if (citySearchTextBox.Text != ""&& date.SelectedDate!=null)
+            {
+                var city = citiesList.Where(z => z.title == citySearchTextBox.Text).FirstOrDefault().id;
+                var weather = DBConnection.db.Weather.Where(z => z.city == city).Where(x => x.day == date.SelectedDate).FirstOrDefault();
+                if (weather != null)
+                {
+                    EditWeatherWindow editWeatherWindow = new EditWeatherWindow(updatebleWindow, weather);
+                    editWeatherWindow.Show();
+                    this.Close();
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
